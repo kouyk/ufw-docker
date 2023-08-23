@@ -378,8 +378,7 @@ function ufw-docker--check-install() {
 }
 
 function ufw-docker--check-install_ipv6() {
-    DOCKER_IPV6_NETWORK=$(sed -En 's/.*"fixed-cidr-v6":.?"([^"]*).*/\1/p' /etc/docker/daemon.json)
-    [[ -z "${DOCKER_IPV6_NETWORK:-}" ]] && die "Could not find \"fixed-cidr-v6\" in \"/etc/docker/daemon.json\"."
+    DOCKER_IPV6_NETWORK="fd00::/7"
 
     after6_rules_tmp="${after6_rules_tmp:-$(mktemp)}"
     rm-on-exit "$after6_rules_tmp"
